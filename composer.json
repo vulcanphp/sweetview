@@ -1,6 +1,6 @@
 {
     "name": "php-script/sweet-view",
-    "description": "Sweet View is a lightweight and powerful template engine that unblocks all the most common features.",
+    "description": "Sweet View is a lightweight and powerful PHP template engine that unblocks all the most common features in handleing a View in PHP.",
     "license": "MIT",
     "authors": [
         {
