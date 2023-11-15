@@ -1,23 +1,23 @@
-# SweetView
-SweetView is a lightweight and powerful template engine that unblocks all the most common features in handleing a View in PHP. The template Syntax is you already know.
+# Sweet View
+Sweet View is a lightweight and powerful template engine that unblocks all the most common features in handleing a View in PHP. The template Syntax is you already know.
 
 ## Installation
 
-It's recommended that you use [Composer](https://getcomposer.org/) to install SweetView.
+It's recommended that you use [Composer](https://getcomposer.org/) to install Sweet View.
 
 ```bash
 $ composer require php-script/sweet-view
 ```
 
 ## Basic Usage
-After Installing SweetView require compoer autoloader then you can simple use it calling view() function
+After Installing Sweet View require compoer autoloader then you can simple use it calling view() function
 
 ```php
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-echo view('welcome', ['message' => 'Welcome to SweetView']);
+echo view('welcome', ['message' => 'Welcome to Sweet View']);
 
 // ...
 ```
@@ -28,7 +28,7 @@ Now, Create a View Template and Layout file into: /resources/views/
 // view: welcome.php
 
 $this->layout('layout.master')
-  ->block('title', 'Welcome to SweetView');
+  ->block('title', 'Welcome to Sweet View');
 
 ?>
 
@@ -61,7 +61,7 @@ $this->minified(true);
 
 Thats it
 
-## SweetView template inside available methods
+## Sweet View template inside available methods
 - layout(string $path): self
 - block(string $name, $value): self
 - hasBlock(string $name): bool
@@ -82,7 +82,7 @@ $this
   ->layout('layout.master')
 
   // add a new block
-  ->block('title', 'Blogs: SweetView')
+  ->block('title', 'Blogs: Sweet View')
 
   // declare variable all over the view
   ->with(['theme' => 'dark', 'sidebar' => true])
@@ -112,7 +112,7 @@ $this
 
 ```
 
-## SweetView Advanced Usage
+## Sweet View Advanced Usage
 ```php
 <?php
 // controller: home.php
@@ -130,13 +130,13 @@ $engine = $view->getDriver()->getEngine();
 $engine->resourceDir(__DIR__ . '/resources/views/');
 
 // render output
-echo $engine->render('welcome', ['message' => 'Welcome to SweetView']);
+echo $engine->render('welcome', ['message' => 'Welcome to Sweet View']);
 
 // ..
 
 ```
 
-## SweetView Html Engine Advanced Usage
+## Sweet View Html Engine Advanced Usage
 ```php
 <?php
 // controller: home.php
@@ -169,12 +169,12 @@ $html->minified();
 $html->with(['theme' => 'dark', 'sidebar' => true]);
 
 // render html output
-echo $html->render(['title' => 'SweetView']);
+echo $html->render(['title' => 'Sweet View']);
 
 // ..
 
 ```
-## SweetView Use Html Meta
+## Sweet View Use Html Meta
 
 ```php
 <?php
