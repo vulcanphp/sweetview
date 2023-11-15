@@ -141,7 +141,7 @@ echo $engine->render('welcome', ['message' => 'Welcome to SweetView']);
 <?php
 // controller: home.php
 
-use PhpScript\SweetView\Html;
+use PhpScript\SweetView\Html\Html;
 
 // create a Html instance
 $html = Html::load('welcome', 'master');
