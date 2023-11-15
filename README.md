@@ -1,5 +1,5 @@
 # Sweet View
-Sweet View is a lightweight and powerful PHP template engine that unblocks all the most common features in handleing a View in PHP.
+Sweet View is a lightweight and powerful PHP template engine that unblocks all the most common features in handling a View in PHP.
 
 ## Installation
 
