@@ -116,6 +116,8 @@ class Html extends HtmlViewer
         unset($params);
         ob_start();
 
+        include $path;
+
         return ob_get_clean();
     }
 }
