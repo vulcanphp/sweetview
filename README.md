@@ -61,7 +61,7 @@ $this->minified(true);
 
 Thats it
 
-## Sweet View template inside available methods
+## Sweet View available methods
 - layout(string $path): self
 - block(string $name, $value): self
 - hasBlock(string $name): bool
