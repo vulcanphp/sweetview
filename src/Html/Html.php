@@ -21,11 +21,6 @@ class Html extends HtmlViewer
     public function clean(): self
     {
         if (isset(ob_get_status()['buffer_size']) && ob_get_status()['buffer_size'] > 0) {
-
-            if (function_exists('do_action')) {
-                do_action('html_clean_output');
-            }
-
             ob_end_clean();
             flush();
         }
@@ -39,10 +34,6 @@ class Html extends HtmlViewer
 
         if ($this->getLayout() !== null) {
             $content = str_ireplace(['{{content}}', '{{ content }}'], $content, $this->getContent($this->viewLocation($this->getLayout())));
-        }
-
-        if (function_exists('apply_filter')) {
-            $content = apply_filter('html_render', $content);
         }
 
         return $this->isMinified() ? preg_replace(['/^ {2,}/m', '/^\t{2,}/m', '~[\r\n]+~'], '',  $content) : $content;
@@ -124,16 +115,6 @@ class Html extends HtmlViewer
         extract($params);
         unset($params);
         ob_start();
-
-        if (function_exists('do_action')) {
-            do_action('before_html_output_buffer', $path);
-        }
-
-        include $path;
-
-        if (function_exists('do_action')) {
-            do_action('after_html_output_buffer', $path);
-        }
 
         return ob_get_clean();
     }

@@ -63,7 +63,9 @@ Thats it
 
 ## SweetView template inside available methods
 - layout(string $path): self
-- block(string $path, $value): self
+- block(string $name, $value): self
+- hasBlock(string $name): bool
+- getBlock(string $name)
 - with(array $params = []): self
 - minified(bool $default = true): self
 - include(string $path, array $params = []): self
@@ -168,6 +170,47 @@ $html->with(['theme' => 'dark', 'sidebar' => true]);
 
 // render html output
 echo $html->render(['title' => 'SweetView']);
+
+// ..
+
+```
+## SweetView Use Html Meta
+
+```php
+<?php
+// layout: master.php
+
+$this
+  // set default meta
+  ->setMeta('charset', 'utf-8')
+  ->setMeta('robots', 'all')
+  ->setMeta('sitename', '{sitename}')
+
+?>
+
+<head>
+  <!-- render generated meta on head tag -->
+  <?= $this->siteMeta() ?>
+</head>
+
+// ..
+
+```
+
+```php
+<?php
+// view: welcome.php
+
+$this->setupMeta([
+  // set meta title
+  'title' => 'SweetView',
+
+  // set meta description
+  'description' => 'Simple & Powerful Php Template Engine',
+
+  // set og:image
+  'image' => 'https://domain.com/images/photo.png',
+]);
 
 // ..
 
