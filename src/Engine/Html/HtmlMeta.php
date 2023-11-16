@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpScript\SweetView\Html;
+namespace PhpScript\SweetView\Engine\Html;
 
 trait HtmlMeta
 {
@@ -42,28 +42,6 @@ trait HtmlMeta
         return ob_get_clean();
     }
 
-    protected function replace_meta(array $values): array
-    {
-        $regx = [
-            '[charset]' => $this->meta('charset', 'utf-8'),
-            '[viewport]' => $this->meta('viewport', 'width=device-width, initial-scale=1.0'),
-            '[robots]' => $this->meta('robots', 'all'),
-            '[language]' => $this->meta('language', 'en'),
-            '[title]' => $this->meta('title'),
-            '[description]' => $this->meta('description'),
-            '[image]' => $this->meta('image', ''),
-            '[url]' => $this->meta('url'),
-            '[sitename]' => $this->meta('sitename'),
-            '[sitename:lower]' => strtolower($this->meta('sitename')),
-        ];
-
-        foreach ($values as $key => $value) {
-            $values[$key] = str_ireplace(array_keys($regx), array_values($regx), $value);
-        }
-
-        return $values;
-    }
-
     protected function generateMeta(): string
     {
         return join("\n\t", $this->replace_meta([
@@ -85,6 +63,28 @@ trait HtmlMeta
             '<meta name="twitter:image" content="[image]"/>',
             '<meta name="twitter:site" content="@[sitename:lower]"/>',
         ]));
+    }
+
+    protected function replace_meta(array $values): array
+    {
+        $regx = [
+            '[charset]' => $this->meta('charset', 'utf-8'),
+            '[viewport]' => $this->meta('viewport', 'width=device-width, initial-scale=1.0'),
+            '[robots]' => $this->meta('robots', 'all'),
+            '[language]' => $this->meta('language', 'en'),
+            '[title]' => $this->meta('title'),
+            '[description]' => $this->meta('description'),
+            '[image]' => $this->meta('image', ''),
+            '[url]' => $this->meta('url'),
+            '[sitename]' => $this->meta('sitename'),
+            '[sitename:lower]' => strtolower($this->meta('sitename')),
+        ];
+
+        foreach ($values as $key => $value) {
+            $values[$key] = str_ireplace(array_keys($regx), array_values($regx), $value);
+        }
+
+        return $values;
     }
 
     protected function generateSchema(): string

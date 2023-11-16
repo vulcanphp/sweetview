@@ -2,7 +2,7 @@
 
 namespace PhpScript\SweetView\Drivers;
 
-use PhpScript\SweetView\Html\Html;
+use PhpScript\SweetView\Engine\Html\Html;
 use PhpScript\SweetView\Interfaces\IViewDriver;
 
 class HtmlDriver implements IViewDriver
