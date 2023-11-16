@@ -34,7 +34,7 @@ class Html extends BaseHtmlEngine implements IEngine
         $content = $this->getContent($this->viewLocation($this->getTemplate()), $params);
 
         if ($this->getLayout() !== null) {
-            $content = str_ireplace(['{{content}}', '{{ content }}'], $content, $this->getContent($this->viewLocation($this->getLayout())));
+            $content = str_ireplace('{{content}}', $content, $this->getContent($this->viewLocation($this->getLayout())));
         }
 
         return $this->isMinified() ? preg_replace(['/^ {2,}/m', '/^\t{2,}/m', '~[\r\n]+~'], '',  $content) : $content;

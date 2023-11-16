@@ -16,7 +16,7 @@ class BaseHtmlEngine
     public function template(string $template): self
     {
         if (stripos($template, sweet_view_root_dir()) !== false) {
-            $location = $this->directoryParse(str_replace('.', '/', $template));
+            $location = $this->directoryParse(str_replace('.', '/', $this->removeExtension($template)));
             $this->resource_dir = substr($location, 0, strrpos($location, DIRECTORY_SEPARATOR) + 1);
             $this->template = substr($location, strrpos($location, DIRECTORY_SEPARATOR) + 1);
         } else {
@@ -146,15 +146,17 @@ class BaseHtmlEngine
 
     protected function viewLocation(string $file): string
     {
-        return $this->directoryParse(sprintf('%s/%s', stripos($file, sweet_view_root_dir()) === false ? ($this->resource_dir ?? '') : sweet_view_root_dir(), str_ireplace(sweet_view_root_dir(), '', str_replace(['.'], '/', $file)))) . $this->getExtension();
+        return $this->directoryParse(sprintf('%s/%s', stripos($file, sweet_view_root_dir()) === false ? ($this->resource_dir ?? '') : sweet_view_root_dir(), str_ireplace(sweet_view_root_dir(), '', str_replace(['.'], '/', $this->removeExtension($file))))) . $this->getExtension();
     }
 
     protected function directoryParse(string $path): string
     {
-        // remove view file extension
-        $path = str_ireplace([$this->getExtension(), '.html', '.xml', '.yml', '.xhtml', '.js', '.vue', '.blade', '.view', '.blade.php', '.view.php'], '', $path);
-
         // parse path with directory separator
         return rtrim(str_replace(['///', '//', '/', (DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR)], DIRECTORY_SEPARATOR, $path), DIRECTORY_SEPARATOR);
+    }
+
+    protected function removeExtension(string $path): string
+    {
+        return str_ireplace($this->getExtension(), '', $path);
     }
 }
