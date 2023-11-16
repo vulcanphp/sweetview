@@ -3,8 +3,9 @@
 namespace PhpScript\SweetView\Engine\Html;
 
 use Exception;
+use PhpScript\SweetView\Interfaces\IEngine;
 
-class Html extends IHtmlEngine
+class Html extends BaseHtmlEngine implements IEngine
 {
     use HtmlMeta;
 
@@ -39,7 +40,7 @@ class Html extends IHtmlEngine
         return $this->isMinified() ? preg_replace(['/^ {2,}/m', '/^\t{2,}/m', '~[\r\n]+~'], '',  $content) : $content;
     }
 
-    protected function getContent(string $path, array $params = []): string
+    public function getContent(string $path, array $params = []): string
     {
         if (!file_exists($path))
             throw new Exception('view file: ' . $path . ' does not exists');

@@ -3,12 +3,13 @@
 namespace PhpScript\SweetView\Drivers;
 
 use PhpScript\SweetView\Engine\Html\Html;
+use PhpScript\SweetView\Interfaces\IEngine;
 use PhpScript\SweetView\Interfaces\IViewDriver;
 
 class HtmlDriver implements IViewDriver
 {
     protected const EXTENSION = '.php', BASE_DIR = 'resources/views';
-    protected Html $engine;
+    protected IEngine $engine;
 
     public function __construct()
     {
@@ -21,7 +22,7 @@ class HtmlDriver implements IViewDriver
         return $this->getEngine()->template($template)->render($paramiters);
     }
 
-    public function getEngine(): Html
+    public function getEngine(): IEngine
     {
         return $this->engine;
     }

@@ -2,7 +2,7 @@
 
 namespace PhpScript\SweetView\Engine\Html;
 
-abstract class IHtmlEngine
+class BaseHtmlEngine
 {
     protected $resource_dir, $extension, $minified, $params = [], $blocks = [];
     protected ?string $template, $layout;
@@ -12,9 +12,6 @@ abstract class IHtmlEngine
         $this->template = $template;
         $this->layout = $layout;
     }
-
-    abstract public function render(array $params = []): string;
-    abstract protected function getContent(string $path, array $params = []): string;
 
     public function template(string $template): self
     {
