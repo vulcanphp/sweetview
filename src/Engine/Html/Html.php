@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpScript\SweetView\Engine\Html;
+namespace VulcanPhp\SweetView\Engine\Html;
 
 use Exception;
-use PhpScript\SweetView\Interfaces\IEngine;
+use VulcanPhp\SweetView\Interfaces\IEngine;
 
 class Html extends BaseHtmlEngine implements IEngine
 {

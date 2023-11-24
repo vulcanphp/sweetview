@@ -1,6 +1,6 @@
 <?php
 
-use PhpScript\SweetView\SweetView;
+use VulcanPhp\SweetView\SweetView;
 
 if (!function_exists('sweet_view_root_dir')) {
     function sweet_view_root_dir($path = '')

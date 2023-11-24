@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpScript\SweetView\Engine\Html;
+namespace VulcanPhp\SweetView\Engine\Html;
 
 class BaseHtmlEngine
 {

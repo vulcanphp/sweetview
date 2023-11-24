@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpScript\SweetView;
+namespace VulcanPhp\SweetView;
 
-use PhpScript\SweetView\Drivers\HtmlDriver;
-use PhpScript\SweetView\Interfaces\IView;
-use PhpScript\SweetView\Interfaces\IViewDriver;
+use VulcanPhp\SweetView\Drivers\HtmlDriver;
+use VulcanPhp\SweetView\Interfaces\IView;
+use VulcanPhp\SweetView\Interfaces\IViewDriver;
 
 class SweetView implements IView
 {

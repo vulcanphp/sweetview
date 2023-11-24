@@ -6,7 +6,7 @@ Sweet View is a lightweight and powerful PHP template engine that unblocks all t
 It's recommended that you use [Composer](https://getcomposer.org/) to install Sweet View.
 
 ```bash
-$ composer require php-script/sweet-view
+$ composer require vulcanphp/sweetview
 ```
 
 ## Basic Usage
@@ -117,8 +117,8 @@ $this
 <?php
 // controller: home.php
 
-use PhpScript\SweetView\Drivers\HtmlDriver;
-use PhpScript\SweetView\SweetView;
+use VulcanPhp\SweetView\Drivers\HtmlDriver;
+use VulcanPhp\SweetView\SweetView;
 
 // create a new SweetView instance
 $view = SweetView::create(new HtmlDriver);
@@ -141,7 +141,7 @@ echo $engine->render('welcome', ['message' => 'Welcome to Sweet View']);
 <?php
 // controller: home.php
 
-use PhpScript\SweetView\Engine\Html\Html;
+use VulcanPhp\SweetView\Engine\Html\Html;
 
 // create a Html instance
 $html = Html::load('welcome', 'master');

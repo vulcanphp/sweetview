@@ -1,5 +1,5 @@
 {
-    "name": "php-script/sweet-view",
+    "name": "vulcanphp/sweetview",
     "description": "Sweet View is a lightweight and powerful PHP template engine that unblocks all the most common features in handling a View in PHP.",
     "license": "MIT",
     "authors": [
@@ -10,7 +10,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "PhpScript\\SweetView\\": "src/"
+            "VulcanPhp\\SweetView\\": "src/"
         },
         "files": [
             "src/helpers.php"

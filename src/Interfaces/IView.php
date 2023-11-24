@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpScript\SweetView\Interfaces;
+namespace VulcanPhp\SweetView\Interfaces;
 
 interface IView
 {
