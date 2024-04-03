@@ -6,8 +6,13 @@ use VulcanPhp\SweetView\Engine\Html\Html;
 
 class FireBlock
 {
-    public function __construct(protected Html $html, protected array $params = [])
+    protected Html $html;
+    protected array $params;
+    
+    public function __construct(Html $html, array $params = [])
     {
+        $this->html = $html;
+        $this->params = $params;
     }
 
     public static function render(...$args): void
