@@ -2,21 +2,21 @@
 
 namespace VulcanPhp\SweetView\Drivers;
 
-use VulcanPhp\SweetView\Engine\Html\Html;
+use VulcanPhp\SweetView\Engine\Fire\FireView;
 use VulcanPhp\SweetView\Interfaces\IEngine;
 use VulcanPhp\SweetView\Interfaces\IViewDriver;
 
-class HtmlDriver implements IViewDriver
+class FireDriver implements IViewDriver
 {
-    protected const EXTENSION = '.php', BASE_DIR = 'resources/views';
+    protected const EXTENSION = '.fire.php', BASE_DIR = 'resources/views';
     protected IEngine $engine;
 
     public function __construct()
     {
-        $this->engine = new Html;
-        $this->engine
-            ->resourceDir(self::BASE_DIR)
-            ->extension(self::EXTENSION);
+        $this->engine = new FireView(
+            self::BASE_DIR,
+            self::EXTENSION
+        );
     }
 
     public function dispatchView(string $template, array $parameters = []): string
@@ -26,7 +26,7 @@ class HtmlDriver implements IViewDriver
             ->render($parameters);
     }
 
-    public function getEngine(): Html
+    public function getEngine(): FireView
     {
         return $this->engine;
     }
