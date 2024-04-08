@@ -1,17 +1,22 @@
 (function () {
     class FireView {
         constructor() {
-            this.loading = false;
-            this.error = false;
             this.timeout = 30;
+            this.isLoading = false;
+            this.isError = false;
+            this.actions = {
+                beforeLoad: [],
+                afterLoad: [],
+                onError: [],
+            };
         }
 
-        get isLoading() {
-            return this.loading;
+        on(action, callback){
+            this.actions[action].push(callback);
         }
 
-        get isError() {
-            return this.error;
+        applyAction(action){
+            this.actions[action].forEach((callback) => callback());
         }
 
         checkFireLinks() {
@@ -94,8 +99,9 @@
         }
 
         async request(path, method = 'get', data = null) {
-            this.loading = true;
-            this.error = false;
+            this.isLoading = true;
+            this.isError = false;
+            this.applyAction('beforeLoad');
             try {
                 const resp = await fetch(path, {
                     method: method,
@@ -109,14 +115,14 @@
                 });
                 return await resp.json()
                     .catch(error => this.fireError(error))
-                    .finally(() => (this.loading = false));
+                    .finally(() => this.isLoading = false, this.applyAction('afterLoad'));
             } catch (error) {
                 this.fireError(error);
             }
         }
 
         fireError(error) {
-            (this.error = true), (this.loading = false), console.log('Fire Error: ' + error);
+            this.isError = true, this.isLoading = false, this.applyAction('afterLoad'), this.applyAction('onError'), console.log('Fire Error: ' + error);
         }
     }
 
