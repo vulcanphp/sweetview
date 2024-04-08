@@ -6,13 +6,8 @@ use VulcanPhp\SweetView\Engine\Html\Html;
 
 class FireBlock
 {
-    protected Html $html;
-    protected array $params;
-    
-    public function __construct(Html $html, array $params = [])
+    public function __construct(protected Html $html, protected array $params = [])
     {
-        $this->html = $html;
-        $this->params = $params;
     }
 
     public static function render(...$args): void
@@ -25,20 +20,14 @@ class FireBlock
     {
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode(
-            $this->getBlockData(),
+            [
+                'content'   => $this->getBlockContent(),
+                'blocks'    => $this->getBlocks(),
+                'title'     => $this->getDocumentTitle(),
+            ],
             JSON_UNESCAPED_UNICODE
         );
         exit;
-    }
-
-
-    public function getBlockData(): array
-    {
-        return [
-            'content'   => $this->getBlockContent(),
-            'blocks'    => $this->getBlocks(),
-            'title'     => $this->getDocumentTitle(),
-        ];
     }
 
     protected function getBlockContent(): string
