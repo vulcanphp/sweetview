@@ -12,11 +12,11 @@
             };
         }
 
-        on(action, callback){
+        on(action, callback) {
             this.actions[action].push(callback);
         }
 
-        applyAction(action){
+        applyAction(action) {
             this.actions[action].forEach((callback) => callback());
         }
 
@@ -66,9 +66,15 @@
         renderFireContent(path) {
             this.request(path)
                 .then((data) => {
-                    if (!this.isError && data && data.content) {
-                        this.updateRouteHistory(path, data),
-                            this.updateDocument(data);
+                    if (!this.isError && data) {
+                        if (data.content) {
+                            this.updateRouteHistory(path, data),
+                                this.updateDocument(data);
+                        } else if (data.push) {
+                            this.route(data.push);
+                        } else if (data.redirect) {
+                            window.location.href = data.redirect;
+                        }
                     }
                 });
         }
