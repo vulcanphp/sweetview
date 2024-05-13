@@ -9,10 +9,11 @@ class FireView implements IEngine
 {
     protected Html $html;
 
-    public function __construct(string $resourceDir, string $extension) {
+    public function __construct(string $extension, string $resourceDir)
+    {
         $this->html = new Html();
-        $this->html->resourceDir($resourceDir);
         $this->html->extension($extension);
+        $this->html->resourceDir($resourceDir);
     }
 
     public function isFireAgent(): bool

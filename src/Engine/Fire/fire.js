@@ -8,6 +8,7 @@
                 beforeLoad: [],
                 afterLoad: [],
                 onError: [],
+                onRender: [],
             };
         }
 
@@ -21,7 +22,7 @@
 
         checkFireLinks() {
             document.querySelectorAll('a[fire]').forEach((fire) => {
-                fire.addEventListener('click', (e) => { e.preventDefault(), this.route(fire.pathname + fire.search) });
+                fire.hostname == location.hostname && fire.addEventListener('click', (e) => { e.preventDefault(), this.route(fire.pathname + fire.search) });
             });
         }
 
@@ -81,7 +82,8 @@
                 this.setFireContent(data.content),
                 this.setFireBlocks(data.blocks),
                 this.checkFireLinks(),
-                this.checkFireForms();
+                this.checkFireForms(),
+                this.applyAction('onRender');
         }
 
         setDocumentTitle(title) {
@@ -115,7 +117,7 @@
                 });
                 return await resp.json()
                     .catch(error => this.fireError(error))
-                    .finally(() => this.isLoading = false, this.applyAction('afterLoad'));
+                    .finally(() => (this.isLoading = false, this.applyAction('afterLoad')));
             } catch (error) {
                 this.fireError(error);
             }
