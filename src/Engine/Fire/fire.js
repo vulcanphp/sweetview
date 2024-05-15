@@ -16,7 +16,7 @@
             this.actions[action].push(callback);
         }
 
-        applyAction(action) {
+        doAction(action) {
             this.actions[action].forEach((callback) => callback());
         }
 
@@ -89,7 +89,7 @@
                 this.setFireBlocks(data.blocks),
                 this.checkFireLinks(),
                 this.checkFireForms(),
-                this.applyAction('onRender');
+                this.doAction('onRender');
         }
 
         setDocumentTitle(title) {
@@ -97,19 +97,42 @@
         }
 
         setFireContent(content) {
-            document.querySelectorAll('[fire="content"]').forEach((div) => div.innerHTML = content);
+            document.querySelectorAll('[fire="content"]').forEach((div) => this.renderHtml(content, div));
         }
 
         setFireBlocks(blocks) {
             Object.entries(blocks).forEach(([key, value]) => {
-                document.querySelectorAll('[fire="' + key + '"]').forEach((div) => div.innerHTML = value);
+                document.querySelectorAll('[fire="' + key + '"]').forEach((div) => this.renderHtml(value, div));
             });
+        }
+
+        renderHtml(html, target) {
+            let div = document.createElement('div');
+            div.innerHTML = html;
+
+            let scripts = div.querySelectorAll('script');
+
+            target.replaceChildren(...div.childNodes);
+
+            for (let i = 0; i < scripts.length; i++) {
+                let script = document.createElement('script');
+                script.type = scripts[i].type || 'text/javascript';
+
+                if (scripts[i].hasAttribute('src')) {
+                    script.src = scripts[i].src;
+                } else {
+                    script.innerHTML = scripts[i].innerHTML;
+                }
+
+                document.head.appendChild(script);
+                document.head.removeChild(script);
+            }
         }
 
         async request(path, method = 'get', data = null) {
             this.isLoading = true;
             this.isError = false;
-            this.applyAction('beforeLoad');
+            this.doAction('beforeLoad');
             try {
                 const resp = await fetch(path, {
                     method: method,
@@ -123,14 +146,14 @@
                 });
                 return await resp.json()
                     .catch(error => this.fireError(error))
-                    .finally(() => (this.isLoading = false, this.applyAction('afterLoad')));
+                    .finally(() => (this.isLoading = false, this.doAction('afterLoad')));
             } catch (error) {
                 this.fireError(error);
             }
         }
 
         fireError(error) {
-            this.isError = true, this.isLoading = false, this.applyAction('afterLoad'), this.applyAction('onError'), console.log('Fire Error: ' + error);
+            this.isError = true, this.isLoading = false, this.doAction('afterLoad'), this.doAction('onError'), console.log('Fire Error: ' + error);
         }
     }
 
